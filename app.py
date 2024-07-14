@@ -36,13 +36,16 @@ def ReceivedMessage():
         number = message["from"]    
         
         text=util.GetTextUser(message)
+
         responseGPT = chatgptservice.GetResponse(text)
         if responseGPT != "error":
             data = util.TextMessage(responseGPT, number)
         else:
             data = util.TextMessage("Lo siento, ocurrió un problema", number)
         whatsappservice.SendMessageWhatsapp(data)
+
         # ProcessMessage(text,number)
+
         return "EVENT_RECEIVED"
     except:
         return "EVENT_RECEIVED"
